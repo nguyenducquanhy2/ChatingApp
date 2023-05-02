@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/ic_more"
+        android:title="more"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menu_item_download_image"
+                android:icon="@drawable/ic_file_download"
+                android:title="@string/menu_Download_image" />
+            <item
+                android:id="@+id/menu_item_nav_viewFullt"
+                android:icon="@drawable/ic_share"
+                android:title="@string/menu_forward" />
+        </menu>
+    </item>
+</menu>

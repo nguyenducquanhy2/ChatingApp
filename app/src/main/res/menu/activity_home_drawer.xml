@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_view_Home"
+        android:icon="@drawable/ic_message"
+        android:title="@string/menu_current_user" />
+    <item
+        android:id="@+id/nav_newContact"
+        android:icon="@drawable/ic_friend_request"
+        android:title="@string/menu_newContact" />
+    <item
+        android:id="@+id/nav_Friend_Request"
+        android:icon="@drawable/ic_new_contact"
+        android:title="@string/menu_frienRequest" />
+    <item
+        android:id="@+id/nav_Friend_Request_Sent"
+        android:icon="@drawable/sent_add_friend_request"
+        android:title="@string/menu_frienRequestSent" />
+    <item android:title="@string/menu_Profile">
+        <menu>
+            <item
+                android:id="@+id/nav_UpdateProfile"
+                android:icon="@drawable/ic_upload_24"
+                android:title="@string/menu_updateProfile" />
+            <item
+                android:id="@+id/nav_change_password"
+                android:icon="@drawable/ic_baseline_lock_24"
+                android:title="@string/menu_changePassword" />
+        </menu>
+    </item>
+    <item android:title="System">
+        <menu>
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/menu_logout" />
+        </menu>
+    </item>
+</menu>

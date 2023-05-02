@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <de.hdodenhof.circleimageview.CircleImageView android:layout_gravity="center_horizontal" android:id="@+id/imgInformationUser" android:layout_width="150dp" android:layout_height="150dp" android:layout_marginTop="30dp" android:src="@drawable/img_default"/>
+    <TextView android:textSize="28sp" android:textColor="@color/teal_700" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile Information" android:fontFamily="@font/roboto_bold"/>
+    <com.google.android.material.textfield.TextInputLayout android:textSize="20sp" android:layout_marginTop="20dp" android:hint="Full name" style="@style/styleEditText">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/edtFullNameProfile" android:layout_width="match_parent" android:layout_height="match_parent" android:fontFamily="@font/roboto_regular"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="25dp">
+        <TextView android:textSize="17sp" android:paddingTop="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Date: " android:fontFamily="@font/roboto_regular" android:paddingStart="10dp"/>
+        <TextView android:textSize="17sp" android:id="@+id/tvDate" android:padding="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="yyyy/mm/dd" android:fontFamily="@font/roboto_regular" android:paddingStart="10dp" android:paddingEnd="10dp"/>
+        <androidx.appcompat.widget.AppCompatButton android:id="@+id/btnChooseDate" android:background="@drawable/buttom_calender" android:layout_width="50dp" android:layout_height="50dp" android:paddingStart="10dp"/>
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton android:textColor="@color/white" android:layout_gravity="center_horizontal" android:id="@+id/btnSetupProfile" android:background="@drawable/button" android:layout_width="150dp" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="Setup profile" android:fontFamily="@font/roboto_medium"/>
+</LinearLayout>
