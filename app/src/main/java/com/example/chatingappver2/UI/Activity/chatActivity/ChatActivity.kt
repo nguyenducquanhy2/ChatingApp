@@ -23,7 +23,10 @@ import com.example.chatapplication.Ui.InterfaceAdapter.MessageOnClick
 import com.example.chatingappver2.Model.Message
 import com.example.chatingappver2.Model.UserProfile
 import com.example.chatingappver2.R
+import com.example.chatingappver2.UI.Activity.CallingActivity
+import com.example.chatingappver2.UI.Activity.MainActivity.HomeActivity
 import com.example.chatingappver2.UI.Activity.ShowFullScreenImg.ShowImgFullScreenActivity
+import com.example.chatingappver2.UI.Activity.VideoCallActivity
 import com.example.chatingappver2.UI.Activity.viewInforActivity
 import com.example.chatingappver2.UI.Adapter.MessageAdapter
 import com.example.finalprojectchatapplycation.Dialog.progressDialog
@@ -40,6 +43,8 @@ import java.util.*
 class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.view,
     MessageOnClick {
 
+
+
     private val REQUEST_CODE_DOWLOAD_IMG: Int = 123
     private val TAG: String = "ChatActivity"
     private val REQUEST_CODE_OPEN_GALLERY: Int = 111
@@ -52,7 +57,6 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
     private lateinit var uriImg: Uri
     private lateinit var dialog: Dialog
 
-    private lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,6 +110,9 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
     private fun registerClickListenerToolBar() {
         toolBar.imgInfor.setOnClickListener(this)
         toolBar.btnBackActivity.setOnClickListener(this)
+        toolBar.btnVoiceCall.setOnClickListener (this)
+        toolBar.btnVideoCall.setOnClickListener (this)
+        toolBar.btnVideoCall.setOnClickListener(this)
     }
 
     private fun hideNavBar() {
@@ -113,6 +120,14 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
@@ -161,10 +176,26 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
                 intent.putExtra("dataFromChatActivity", bundle)
                 startActivity(intent)
             }
+            R.id.btnVoiceCall -> {
+                if (HomeActivity.client!!.isConnected==false)return
+                val idUser= accountFocus?.idUser
+                val intent=Intent(this, CallingActivity::class.java)
+                intent.putExtra("isComingCall",false)
+                intent.putExtra("to",idUser)
+                startActivity(intent)
+            }
+
+            R.id.btnVideoCall -> {
+                if (HomeActivity.client!!.isConnected==false)return
+                val idUser=accountFocus?.idUser
+                val intent=Intent(this, VideoCallActivity::class.java)
+                intent.putExtra("isComingCall",false)
+                intent.putExtra("to",idUser)
+                startActivity(intent)
+            }
 
         }
     }
-
 
     private fun takePhoto() {
 

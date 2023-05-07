@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.CAMERA"
-        android:required="true"
-        android:requiredFeature="true" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -21,64 +25,53 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatingAppVer2"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <activity
-            android:name="com.example.chatingappver2.UI.Activity.SignIn.SignInActivity"
+            android:name=".UI.Activity.VideoCallActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.CallingActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".UI.Activity.SignIn.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:theme="@style/NoActionBar"
-            android:name="com.example.chatingappver2.UI.Activity.chatActivity.ChatActivity"
-            android:exported="false">
-        </activity>
+            android:name=".UI.Activity.chatActivity.ChatActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
         <activity
-            android:name="com.example.chatingappver2.UI.Activity.ForgotPassword.ForgotPasswordActivity"
-            android:exported="false">
-        </activity>
-
-<!--        android:theme="@style/MyTheme"-->
+            android:name=".UI.Activity.ForgotPassword.ForgotPasswordActivity"
+            android:exported="false" /> <!-- android:theme="@style/MyTheme" -->
         <activity
-            android:name="com.example.chatingappver2.UI.Activity.MainActivity.HomeActivity"
-
-            android:exported="false">
-        </activity>
-
+            android:name=".UI.Activity.MainActivity.HomeActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.chatingappver2.UI.Activity.ProfileCreate.ProfileCreateActivity"
-            android:exported="false">
-        </activity>
-
+            android:name=".UI.Activity.ProfileCreate.ProfileCreateActivity"
+            android:exported="false" />
         <activity
-            android:theme="@style/activityFullScreen"
-            android:name="com.example.chatingappver2.UI.Activity.ShowFullScreenImg.ShowImgFullScreenActivity"
-            android:exported="false">
-        </activity>
-
+            android:name=".UI.Activity.ShowFullScreenImg.ShowImgFullScreenActivity"
+            android:exported="false"
+            android:theme="@style/activityFullScreen" />
         <activity
-            android:name="com.example.chatingappver2.UI.Activity.Verification.VerificationActivity"
-            android:exported="false">
-        </activity>
-
+            android:name=".UI.Activity.Verification.VerificationActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.chatingappver2.UI.Activity.SignUp.SignUpActivity"
-            android:exported="false">
-        </activity>
-
+            android:name=".UI.Activity.SignUp.SignUpActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.chatingappver2.UI.Activity.viewInforActivity"
-            android:exported="false">
-        </activity>
-
+            android:name=".UI.Activity.viewInforActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

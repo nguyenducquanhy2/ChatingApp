@@ -14,9 +14,15 @@ import com.example.chatingappver2.R
 import com.example.chatingappver2.UI.Activity.chatActivity.ChatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.layout_user.view.*
+import kotlinx.android.synthetic.main.layout_user.view.iconSeen
+import kotlinx.android.synthetic.main.layout_user.view.imgIconOnline
+import kotlinx.android.synthetic.main.layout_user.view.imgProfileUserNewContacts
+import kotlinx.android.synthetic.main.layout_user.view.tvFullnameUserAccount
+import kotlinx.android.synthetic.main.layout_user.view.tvLastDateSent
+import kotlinx.android.synthetic.main.layout_user.view.tvLastMesage
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 import kotlin.jvm.internal.Intrinsics
 
 
@@ -68,7 +74,7 @@ class adapterCurrentUser constructor(
         }
 
         if (currentcontacts.idUserLastSentMsg == currentcontacts.idUser) {
-            itemView.tvLastMesage.text = currentcontacts.lastSentDate
+            itemView.tvLastMesage.text = currentcontacts.lastSentMsg
         } else {
             itemView.tvLastMesage.text = "You: " + currentcontacts.lastSentMsg
         }
