@@ -38,6 +38,8 @@ import com.stringee.listener.StatusListener
 import com.stringee.listener.StringeeConnectionListener
 import kotlinx.android.synthetic.main.activity_home.drawer_layout
 import kotlinx.android.synthetic.main.activity_home.nav_view
+import kotlinx.android.synthetic.main.layout_logout.btnAllowLogout
+import kotlinx.android.synthetic.main.layout_logout.btnCancelLogout
 import kotlinx.android.synthetic.main.nav_header_home.view.BirthDayHeader
 import kotlinx.android.synthetic.main.nav_header_home.view.fullnameHeader
 import kotlinx.android.synthetic.main.nav_header_home.view.imageViewHeader
@@ -280,8 +282,8 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
     private fun showDialogLogout() {
         val dialogLogout = LogoutDialog.logoutDialog(this)
 
-        val btnCancel = dialogLogout.findViewById<Button>(R.id.btnCancelLogout)
-        val btnLogout = dialogLogout.findViewById<Button>(R.id.btnAllowLogout)
+        val btnCancel = dialogLogout.btnCancelLogout
+        val btnLogout = dialogLogout.btnAllowLogout
 
         btnCancel.setOnClickListener {
             dialogLogout.dismiss()

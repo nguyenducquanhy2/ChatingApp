@@ -11,10 +11,17 @@ interface ChatActivityContract {
         fun sendMsgFail()
         fun sendMsgSuccess()
         fun addMessage(message: Message)
-        fun removeMessageForMe()
+
         fun removeMessageForEveryone()
         fun sendImgSuccess()
         fun sendImgFail()
+
+        fun getCurrentMessages(): MutableList<Message>
+
+        fun removeMsgForMe(count:Int)
+
+        fun messageValueChange(messageChange:Message,index:Int)
+
     }
 
     interface presenter{
@@ -22,6 +29,10 @@ interface ChatActivityContract {
         fun getMessages()
         fun sendImg(uriImg: Uri)
         fun getImageUriAndSending(contentResolver: ContentResolver,uriImg: Uri)
+
+        fun unsendMsgForEveryOne(keyMsg:String)
+        fun unsendMsgForYou(keyMsg:String)
+
     }
 
 }

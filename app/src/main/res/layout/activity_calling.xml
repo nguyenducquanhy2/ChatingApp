@@ -31,6 +31,14 @@
             android:text="fullname"
             android:textColor="@color/white"/>
 
+        <Chronometer
+            android:id="@+id/countUpChronometer"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="22sp"
+            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/tvStatusCall"
             android:layout_width="wrap_content"
