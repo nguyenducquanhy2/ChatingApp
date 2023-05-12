@@ -68,6 +68,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:text="lasMsg"
+            android:maxWidth="250dp"
+            android:maxHeight="24dp"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="normal" />

@@ -77,7 +77,7 @@ class ChatActivityPresenter(
                     this@ChatActivityPresenter.senderProfile = createUserProfile
                 }
 
-                // com.google.firebase.database.ValueEventListener
+
                 override fun onCancelled(error: DatabaseError) {
 
                     Log.e(TAG, "onCancelled: " + error.message)
@@ -85,18 +85,7 @@ class ChatActivityPresenter(
             })
     }
 
-    private fun createUserProfile(dataSnapshot: DataSnapshot): UserProfile {
 
-        val map: Map<*, *> = dataSnapshot.value as Map<*, *>
-        val dateOfBirth: String = map.get("dateOfBirth").toString()
-        val email: String = map.get("email").toString()
-        val fullname: String = map.get("fullname").toString()
-        val idUser: String = map.get("idUser").toString()
-        val theyIsActive: Boolean = map.get("theyIsActive").toString().toBoolean()
-        val urlImgProfile: String = map.get("urlImgProfile").toString()
-
-        return UserProfile(dateOfBirth, email, fullname, idUser, theyIsActive, urlImgProfile)
-    }
 
     override fun submitSendMsg(msg: String, urlImg: String) {
         if (msg.trim().isEmpty()) {
@@ -121,7 +110,6 @@ class ChatActivityPresenter(
         database.reference.child("chats").child(sendRoom!!).child("message").orderByKey()
             .addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                    val viewVar: ChatActivityContract.view
                     val message: Message = snapshot.getValue(Message::class.java) as Message
                     message.keyMsg = snapshot.key
 
@@ -129,11 +117,54 @@ class ChatActivityPresenter(
                 }
 
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                    val messageChange:Message = snapshot.getValue(Message::class.java)!!
+                    messageChange.keyMsg=snapshot.key
+                    val messages = view.getCurrentMessages()
+
+                    if (messages[messages.lastIndex].keyMsg==messageChange.keyMsg){
+                        view.messageValueChange(messageChange,messages.lastIndex)
+                        val msgSenderRemove="You unsent a message"
+                        val msgReceiverRemove="${receiverProfile?.fullname} unsent a message"
+                        for (item in (messages.size-1) downTo 1){
+                            if (messages[item].msgTxt!=msgSenderRemove && messages[item].msgTxt!=msgReceiverRemove){
+                                sendNotifycationForThem(messages[item])
+                                break
+                            }
+
+                        }
+
+                    }
+
+                    var count=0
+                    for (item in messages){
+                        if (item.keyMsg==messageChange.keyMsg){
+                            view.messageValueChange(messageChange,count)
+                            break
+                        }
+                        count++
+                    }
 
                 }
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
+                    val messageRemove:Message = snapshot.getValue(Message::class.java)!!
+                    messageRemove.keyMsg=snapshot.key
+                    val messages = view.getCurrentMessages()
 
+                    if (messages[messages.lastIndex].keyMsg==messageRemove.keyMsg){
+                        view.removeMsgForMe(messages.lastIndex)
+                        sendNotifycationForThem(messages[messages.lastIndex-1])
+                        return
+                    }
+
+                    var count=0
+                    for (item in messages){
+                        if (item.keyMsg==messageRemove.keyMsg){
+                            view.removeMsgForMe(count)
+                            break
+                        }
+                        count++
+                    }
                 }
 
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -183,9 +214,7 @@ class ChatActivityPresenter(
         val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uriImg)
         val createTempFile = File.createTempFile("temprentpk", ".png")
         val byteArrayOutputStream = ByteArrayOutputStream()
-        if (bitmap != null) {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-        }
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
         val fileOutputStream = FileOutputStream(createTempFile)
         fileOutputStream.write(byteArray)
@@ -193,6 +222,28 @@ class ChatActivityPresenter(
         fileOutputStream.close()
         val imageURI = Uri.fromFile(createTempFile)
         sendImg(imageURI)
+    }
+
+    override fun unsendMsgForEveryOne(keyMsg: String) {
+        val msgSenderRemove="You unsent a message"
+        val msgReceiverRemove="${senderProfile?.fullname} unsent a message"
+
+        database.reference.child("chats").child(receiveRoom!!).child("message").child(keyMsg)
+            .setValue(createMsgNull(msgReceiverRemove))
+
+        database.reference.child("chats").child(sendRoom!!).child("message").child(keyMsg)
+            .setValue(createMsgNull(msgSenderRemove))
+    }
+
+    private fun createMsgNull(msgRemove:String):Message{
+        val keyMsg = database.reference.push().key.toString()
+        return createMessage(msgRemove, "")
+    }
+
+    override fun unsendMsgForYou(keyMsg: String) {
+        database.reference.child("chats").child(sendRoom!!).child("message").child(keyMsg)
+            .removeValue()
+
     }
 
     private fun rotateImage(bitmap: Bitmap, i: Int): Bitmap {
@@ -263,5 +314,17 @@ class ChatActivityPresenter(
         )
     }
 
+    private fun createUserProfile(dataSnapshot: DataSnapshot): UserProfile {
+
+        val map: Map<*, *> = dataSnapshot.value as Map<*, *>
+        val dateOfBirth: String = map.get("dateOfBirth").toString()
+        val email: String = map.get("email").toString()
+        val fullname: String = map.get("fullname").toString()
+        val idUser: String = map.get("idUser").toString()
+        val theyIsActive: Boolean = map.get("theyIsActive").toString().toBoolean()
+        val urlImgProfile: String = map.get("urlImgProfile").toString()
+
+        return UserProfile(dateOfBirth, email, fullname, idUser, theyIsActive, urlImgProfile)
+    }
 
 }

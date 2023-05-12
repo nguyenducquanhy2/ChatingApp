@@ -5,7 +5,9 @@ import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,10 +21,10 @@ import com.stringee.call.StringeeCall
 import com.stringee.common.StringeeAudioManager
 import kotlinx.android.synthetic.main.activity_calling.btnAllow
 import kotlinx.android.synthetic.main.activity_calling.btnAudio
-import kotlinx.android.synthetic.main.activity_calling.btnCammeraCallingActivity
 import kotlinx.android.synthetic.main.activity_calling.btnCancel
 import kotlinx.android.synthetic.main.activity_calling.btnDecline
 import kotlinx.android.synthetic.main.activity_calling.btnMic
+import kotlinx.android.synthetic.main.activity_calling.countUpChronometer
 import kotlinx.android.synthetic.main.activity_calling.imgAvataCallingActivity
 import kotlinx.android.synthetic.main.activity_calling.layoutCallingMain
 import kotlinx.android.synthetic.main.activity_calling.layoutHandleInCalling
@@ -32,6 +34,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.TimeZone
 
 class CallingActivity : AppCompatActivity() {
 
@@ -79,16 +85,16 @@ class CallingActivity : AppCompatActivity() {
                 }
             }
         }
-        btnCammeraCallingActivity.setOnClickListener {
-            CoroutineScope(Dispatchers.Main).launch {
-                isCamOn=!isCamOn
-                if(isCamOn){
-                    btnCammeraCallingActivity.setImageDrawable(ContextCompat.getDrawable(this@CallingActivity,R.drawable.hidecam))
-                }else{
-                    btnCammeraCallingActivity.setImageDrawable(ContextCompat.getDrawable(this@CallingActivity,R.drawable.showcam))
-                }
-            }
-        }
+//        btnCammeraCallingActivity.setOnClickListener {
+//            CoroutineScope(Dispatchers.Main).launch {
+//                isCamOn=!isCamOn
+//                if(isCamOn){
+//                    btnCammeraCallingActivity.setImageDrawable(ContextCompat.getDrawable(this@CallingActivity,R.drawable.hidecam))
+//                }else{
+//                    btnCammeraCallingActivity.setImageDrawable(ContextCompat.getDrawable(this@CallingActivity,R.drawable.showcam))
+//                }
+//            }
+//        }
         btnCancel.setOnClickListener{
             CoroutineScope(Dispatchers.Main).launch {
                 call?.hangup(object : com.stringee.listener.StatusListener() {
@@ -228,9 +234,6 @@ class CallingActivity : AppCompatActivity() {
 
                         StringeeCall.SignalingState.ANSWERED -> {
                             tvStatusCall.text = "Starting"
-//                            if (mMediaConnected == StringeeCall.MediaState.CONNECTED) {
-//                                tvStatusCall.text = "Started"
-//                            }
                         }
 
                         StringeeCall.SignalingState.BUSY -> {
@@ -244,14 +247,15 @@ class CallingActivity : AppCompatActivity() {
                         }
 
                         StringeeCall.SignalingState.ENDED -> {
+                            countUpChronometer.visibility=View.GONE
+                            tvStatusCall.visibility=View.VISIBLE
                             audioManager.stop()
+                            countUpChronometer.stop()
+                            showElapsedTime()
                             tvStatusCall.text = "Ended"
                             finish()
                         }
-
                     }
-
-
                 }
             }
 
@@ -274,14 +278,15 @@ class CallingActivity : AppCompatActivity() {
 
                     if (mMediaConnected == StringeeCall.MediaState.CONNECTED) {
                         if (mSignalLingState== StringeeCall.SignalingState.ANSWERED){
-                            tvStatusCall.text = "Started"
+                            tvStatusCall.visibility = View.GONE
+                            countUpChronometer.visibility=View.VISIBLE
+                            countUpChronometer.base = SystemClock.elapsedRealtime()
+                            countUpChronometer.start()
                         }
                     }
                     else{
                         tvStatusCall.text = "Retry to connect"
                     }
-
-
                 }
             }
 
@@ -315,6 +320,15 @@ class CallingActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun showElapsedTime() {
+        val elapsedMillis: Long = SystemClock.elapsedRealtime() - countUpChronometer.base
+        val date = Date(elapsedMillis)
+        val formatter: DateFormat = SimpleDateFormat("HH:mm:ss")
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        val dateFormatted = formatter.format(date)
+        Toast.makeText(this, dateFormatted, Toast.LENGTH_SHORT).show()
     }
 
     private fun setLayoutInCommingCall() {

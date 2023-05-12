@@ -29,11 +29,17 @@ import com.example.chatingappver2.UI.Activity.ShowFullScreenImg.ShowImgFullScree
 import com.example.chatingappver2.UI.Activity.VideoCallActivity
 import com.example.chatingappver2.UI.Activity.viewInforActivity
 import com.example.chatingappver2.UI.Adapter.MessageAdapter
+import com.example.chatingappver2.UI.Dialog.moreDialogMessage
 import com.example.finalprojectchatapplycation.Dialog.progressDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.activity_chat.view.*
 import kotlinx.android.synthetic.main.bottom_shet_dialog.*
+import kotlinx.android.synthetic.main.layout_delete_for_you_message_removed.removeForYouDialogMsgRemoved
+import kotlinx.android.synthetic.main.layout_delete_message.removeForYou
+import kotlinx.android.synthetic.main.layout_delete_message.unsendEveryOne
+import kotlinx.android.synthetic.main.layout_more_message.forwardMessage
+import kotlinx.android.synthetic.main.layout_more_message.removeMessage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,9 +49,6 @@ import java.util.*
 class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.view,
     MessageOnClick {
 
-
-
-    private val REQUEST_CODE_DOWLOAD_IMG: Int = 123
     private val TAG: String = "ChatActivity"
     private val REQUEST_CODE_OPEN_GALLERY: Int = 111
     private val REQUEST_CODE_OPEN_CAMERA: Int = 666
@@ -276,12 +279,7 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
         }
     }
 
-    override fun removeMessageForMe() {
-        CoroutineScope(Dispatchers.Main).launch {
 
-        }
-
-    }
 
     override fun removeMessageForEveryone() {
         CoroutineScope(Dispatchers.Main).launch {
@@ -298,17 +296,64 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
         CoroutineScope(Dispatchers.Main).launch { dialog.dismiss() }
     }
 
-    override fun msgOnLongClickListener(view: View) {
-        openDialogForMesageText(view)
+    override fun getCurrentMessages(): MutableList<Message> {
+
+        return messages
     }
 
+    override fun removeMsgForMe(count: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            messages.removeAt(count)
+            adapterMsg.notifyDataSetChanged()
+        }
+    }
+
+    override fun messageValueChange(messageChange: Message, index: Int) {
+        messages[index]=messageChange
+        adapterMsg.notifyItemChanged(index)
+    }
+
+    override fun msgOnLongClickListener(
+        view: View,
+        message: String,
+        urlImage: String,
+        keyMsg: String
+    ) {
+        val msgSenderRemove="You unsent a message"
+        val msgReceiverRemove="${accountFocus?.fullname} unsent a message"
+
+        if (message==msgSenderRemove||message==msgReceiverRemove){
+            openDialogRemovedMesage(keyMsg)
+        }else{
+            openDialogForMesageText(view,urlImage,keyMsg)
+        }
+    }
+
+    private fun openDialogRemovedMesage( keyMsg: String) {
+        val view =LayoutInflater.from(this).inflate(R.layout.layout_delete_for_you_message_removed,null)
+        val dialog=BottomSheetDialog(this)
+        dialog.setContentView(view)
+        dialog.setCancelable(true)
+        dialog.removeForYouDialogMsgRemoved.setOnClickListener {
+
+            presenter.unsendMsgForYou(keyMsg)
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+
     override fun ImageMessageOnClickListener(urlImage: String) {
+        changeActivityFullViewImg(urlImage)
+    }
+
+    private fun changeActivityFullViewImg(urlImage: String) {
         val intent=Intent(this,ShowImgFullScreenActivity::class.java)
         intent.putExtra("urlImg",urlImage)
         startActivity(intent)
     }
 
-    private fun openDialogForMesageText(viewLongfocus: View) {
+    private fun openDialogForMesageText(viewLongfocus: View, urlImage: String,keyMsg:String) {
 
         val view = LayoutInflater.from(this).inflate(R.layout.bottom_shet_dialog, null)
         val dialog = BottomSheetDialog(this)
@@ -328,8 +373,8 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
             dialog.dismiss()
         }
 
-        dialog.btnDownLoadImg.setOnClickListener {
-            //Toast.makeText(this, "DownLoad", Toast.LENGTH_SHORT).show()
+        dialog.btnFullViewImage.setOnClickListener {
+            changeActivityFullViewImg(urlImage)
             dialog.dismiss()
         }
 
@@ -348,7 +393,44 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
         }
 
         dialog.btnMore.setOnClickListener {
-            Toast.makeText(this, "more", Toast.LENGTH_SHORT).show()
+            showMoreLayout(keyMsg)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun showMoreLayout(keyMsg:String) {
+        val dialogMoreMsg=moreDialogMessage.moreDialogMessage(this)
+        val btnForward=dialogMoreMsg.forwardMessage
+        val btnRemove=dialogMoreMsg.removeMessage
+        btnForward.setOnClickListener {
+            Toast.makeText(this, "Forward", Toast.LENGTH_SHORT).show()
+            dialogMoreMsg.dismiss()
+        }
+
+        btnRemove.setOnClickListener {
+            showDialogRemoveMsg(keyMsg)
+            dialogMoreMsg.dismiss()
+        }
+
+        dialogMoreMsg.show()
+    }
+
+    private fun showDialogRemoveMsg(keyMsg:String) {
+        val view = LayoutInflater.from(this).inflate(R.layout.layout_delete_message, null)
+        val dialog = BottomSheetDialog(this)
+        dialog.setCancelable(true)
+        dialog.setContentView(view)
+
+        dialog.unsendEveryOne.setOnClickListener {
+            Toast.makeText(this, "unsend", Toast.LENGTH_SHORT).show()
+            presenter.unsendMsgForEveryOne(keyMsg)
+            dialog.dismiss()
+        }
+
+        dialog.removeForYou.setOnClickListener {
+            presenter.unsendMsgForYou(keyMsg)
             dialog.dismiss()
         }
 

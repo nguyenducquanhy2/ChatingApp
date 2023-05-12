@@ -29,7 +29,7 @@ class MessageAdapter(
     private val ITEM_RECEIVE: Int = 2
     private val ITEM_SENT: Int = 1
     private val MSG_IMAGE: String = "photo"
-    private val REQUEST_CODE: Int = 123
+
     private val senderAccount: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
 
     override fun getItemViewType(i: Int): Int {
@@ -56,8 +56,7 @@ class MessageAdapter(
         holder.setIsRecyclable(false)
 
         if ((holder is SentMsgHolder)) {
-
-            setValueMsgSend(holder as SentMsgHolder,message)
+            setValueMsgSend(holder ,message)
 
         } else {
             setValueMsgReceive(holder as ReceiveMsgHolder,message)
@@ -79,19 +78,22 @@ class MessageAdapter(
                 MessageOnClick.ImageMessageOnClickListener(message.urlImg)
             }
 
-            viewHolderReceive.itemView.setOnLongClickListener {
+            viewHolderReceive.itemView.imgReceive.setOnLongClickListener {
                 val imageViewReceive = viewHolderReceive.itemView.imgReceive
-                MessageOnClick.msgOnLongClickListener(imageViewReceive)
+                MessageOnClick.msgOnLongClickListener(imageViewReceive,message.msgTxt,message.urlImg,message.keyMsg!!)
                 return@setOnLongClickListener true
             }
 
         }
         setTimeReceive(viewHolderReceive, message.time)
-        ((viewHolderReceive).itemView.findViewById<View>(R.id.tvReceive) as TextView).text =
+        viewHolderReceive.itemView.tvReceive.text =
             message.msgTxt
-        (viewHolderReceive).itemView.setOnLongClickListener {
+
+        viewHolderReceive.itemView.setOnLongClickListener {
             val textViewReceive = viewHolderReceive.itemView.tvReceive
-            MessageOnClick.msgOnLongClickListener(textViewReceive)
+
+
+            MessageOnClick.msgOnLongClickListener(textViewReceive,message.msgTxt,"",message.keyMsg!!)
             return@setOnLongClickListener true
         }
     }
@@ -110,7 +112,8 @@ class MessageAdapter(
 
             viewHolderSend.itemView.imgSend.setOnLongClickListener {
                 val imageViewSend = viewHolderSend.itemView.imgSend
-                MessageOnClick.msgOnLongClickListener(imageViewSend)
+                MessageOnClick.msgOnLongClickListener(imageViewSend,message.msgTxt,message.urlImg,message.keyMsg!!)
+
                 return@setOnLongClickListener true
             }
         }
@@ -118,7 +121,7 @@ class MessageAdapter(
         viewHolderSend.itemView.tvMsgSend.text = message.msgTxt
         viewHolderSend.itemView.setOnLongClickListener {
             val textViewSend = viewHolderSend.itemView.tvMsgSend
-            MessageOnClick.msgOnLongClickListener(textViewSend)
+            MessageOnClick.msgOnLongClickListener(textViewSend,message.msgTxt,"",message.keyMsg!!)
             return@setOnLongClickListener true
         }
 
