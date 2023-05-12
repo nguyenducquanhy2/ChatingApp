@@ -97,7 +97,7 @@
             android:layout_marginEnd="00dp"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/swapcam"/>
+            android:src="@drawable/swichswapcam"/>
 
         <ImageView
             android:id="@+id/btnCancelVideoCAllActivity"

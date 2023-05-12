@@ -75,7 +75,7 @@ class CallingActivity : AppCompatActivity() {
                 if(isMicOn){
                     btnMic.setImageDrawable(ContextCompat.getDrawable(this@CallingActivity,R.drawable.turnonmic))
                 }else{
-                    btnMic.setImageDrawable(ContextCompat.getDrawable(this@CallingActivity,R.drawable.mutemic))
+                    btnMic.setImageDrawable(ContextCompat.getDrawable(this@CallingActivity,R.drawable.ic_mutemic))
                 }
             }
         }

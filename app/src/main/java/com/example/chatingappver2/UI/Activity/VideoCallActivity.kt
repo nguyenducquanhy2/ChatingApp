@@ -76,7 +76,7 @@ class VideoCallActivity : AppCompatActivity() {
                 if(isMicOn){
                     btnMicVideoCAllActivity.setImageDrawable(ContextCompat.getDrawable(this@VideoCallActivity,R.drawable.turnonmic))
                 }else{
-                    btnMicVideoCAllActivity.setImageDrawable(ContextCompat.getDrawable(this@VideoCallActivity,R.drawable.mutemic))
+                    btnMicVideoCAllActivity.setImageDrawable(ContextCompat.getDrawable(this@VideoCallActivity,R.drawable.ic_mutemic))
                 }
             }
         }
