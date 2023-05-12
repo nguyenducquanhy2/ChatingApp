@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.chatingappver2.Model.UserProfile
 import com.example.chatingappver2.R
 import com.example.chatingappver2.UI.Activity.ForgotPassword.ForgotPasswordActivity
 import com.example.chatingappver2.UI.Activity.MainActivity.HomeActivity
@@ -14,6 +15,7 @@ import com.example.chatingappver2.UI.Activity.SignUp.SignUpActivity
 import com.example.chatingappver2.UI.Activity.Verification.VerificationActivity
 import com.example.finalprojectchatapplycation.Dialog.progressDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_sign_in.btnSignIn
 import kotlinx.android.synthetic.main.activity_sign_in.edtEmailLogin
@@ -80,6 +82,18 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
         presenter.Login(valueOf, valueOf2)
     }
 
+    private fun createUserProfile(snapshot: DataSnapshot): UserProfile {
+        val resultMap = snapshot.value as Map<String, Any>
+
+        val theyIsActive: Boolean = resultMap["theyIsActive"].toString().toBoolean()
+        val fullname: String = resultMap["fullname"].toString()
+        val urlImgProfile: String = resultMap["urlImgProfile"].toString()
+        val dateOfBirth: String = resultMap["dateOfBirth"].toString()
+        val email: String = resultMap["email"].toString()
+        val idUser: String = resultMap["idUser"].toString()
+
+        return UserProfile(dateOfBirth, email, fullname, idUser, theyIsActive, urlImgProfile)
+    }
 
     override fun notifyEmailWrong() {
         var dialog: Dialog? = dialog
