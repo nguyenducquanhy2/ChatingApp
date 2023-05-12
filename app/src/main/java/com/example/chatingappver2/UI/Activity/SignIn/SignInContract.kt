@@ -8,9 +8,12 @@ package com.example.chatingappver2.UI.Activity.SignIn
         fun checkCurrentlySigned()
         fun validEmail(str: String): Boolean
         fun validPassword(str: String): Boolean
+
     }
 
      interface view {
+
+
         fun changeHomeActivity()
         fun changeUpdateProfile()
         fun changeVerifiActivity()

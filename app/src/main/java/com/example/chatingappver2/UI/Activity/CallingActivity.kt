@@ -51,8 +51,6 @@ class CallingActivity : AppCompatActivity() {
     private lateinit var phoneRinging: MediaPlayer
     private var isSpeaker:Boolean=false
     private var isMicOn:Boolean=true
-    private var isCamOn=false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

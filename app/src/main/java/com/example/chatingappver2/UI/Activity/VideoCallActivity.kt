@@ -134,7 +134,7 @@ class VideoCallActivity : AppCompatActivity() {
                 call?.enableVideo(isCamera)
                 if (isCamera){
                     btnCammeraVideoCAllActivity.setImageDrawable(
-                        ContextCompat.getDrawable(this@VideoCallActivity,R.drawable.showcam))
+                        ContextCompat.getDrawable(this@VideoCallActivity,R.drawable.ic_showcam))
                     imgLocalVideoCAll.visibility=View.VISIBLE
                 }else{
                     btnCammeraVideoCAllActivity.setImageDrawable(

@@ -23,8 +23,12 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_home.refreshLayout
+import kotlinx.android.synthetic.main.fragment_home.searchCurrentContact
+import kotlinx.android.synthetic.main.fragment_home.view.btnHideKeyBoard
+import kotlinx.android.synthetic.main.fragment_home.view.recyClerCurrentContact
+import kotlinx.android.synthetic.main.fragment_home.view.refreshLayout
+import kotlinx.android.synthetic.main.fragment_home.view.searchCurrentContact
 
 class FragmentHome : Fragment() {
     private val TAG: String = "FragmentHome"
@@ -117,7 +121,7 @@ class FragmentHome : Fragment() {
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
                     val createCurrentUserOnData = createCurrentUserOnData(snapshot)
                     var count = 0
-                    for (currentcontacts: currentContacts in oldListUser) {
+                    for (currentcontacts in oldListUser) {
                         if (currentcontacts.idUser == createCurrentUserOnData.idUser) {
                             oldListUser[count] = createCurrentUserOnData
                             adapterCurrentContact?.notifyItemChanged(count)

@@ -13,20 +13,28 @@ import com.example.chatingappver2.UI.Activity.ProfileCreate.ProfileCreateActivit
 import com.example.chatingappver2.UI.Activity.SignUp.SignUpActivity
 import com.example.chatingappver2.UI.Activity.Verification.VerificationActivity
 import com.example.finalprojectchatapplycation.Dialog.progressDialog
-import kotlinx.android.synthetic.main.activity_sign_in.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_sign_in.btnSignIn
+import kotlinx.android.synthetic.main.activity_sign_in.edtEmailLogin
+import kotlinx.android.synthetic.main.activity_sign_in.edtxtPassword
+import kotlinx.android.synthetic.main.activity_sign_in.tvForgotPassword
+import kotlinx.android.synthetic.main.activity_sign_in.tvSignUp
 
 
 class SignInActivity() : AppCompatActivity(), View.OnClickListener,
-    com.example.chatingappver2.UI.Activity.SignIn.SignInContract.view {
+    SignInContract.view {
     private var dialog: Dialog? = null
     private val TAG: String = "SignInActivity"
+    private val database = FirebaseDatabase.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+    private val currentUser = auth.currentUser
     private val presenter by lazy {
-        com.example.chatingappver2.UI.Activity.SignIn.SigninPresenter(
+        SigninPresenter(
             this,
             this
         )
     }
-
 
     public override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
@@ -44,15 +52,17 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
         tvSignUp.setOnClickListener(this)
     }
 
-     override fun onClick(view: View) {
-        when(view.id){
-            btnSignIn.id->{
+    override fun onClick(view: View) {
+        when (view.id) {
+            btnSignIn.id -> {
                 login()
             }
-            tvForgotPassword.id->{
+
+            tvForgotPassword.id -> {
                 startActivity(Intent(this, ForgotPasswordActivity::class.java))
             }
-            tvSignUp.id->{
+
+            tvSignUp.id -> {
                 startActivity(Intent(this, SignUpActivity::class.java))
             }
         }
@@ -61,7 +71,7 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
 
     private fun login() {
         val valueOf: String = edtEmailLogin.getText().toString()
-        val valueOf2: String =edtxtPassword.getText().toString()
+        val valueOf2: String = edtxtPassword.getText().toString()
         var dialog: Dialog? = dialog
         if (dialog == null) {
             dialog = null
@@ -71,7 +81,7 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
     }
 
 
-     override fun notifyEmailWrong() {
+    override fun notifyEmailWrong() {
         var dialog: Dialog? = dialog
         if (dialog == null) {
             dialog = null
@@ -81,7 +91,7 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
     }
 
 
-     override fun notifyPasswordWrong() {
+    override fun notifyPasswordWrong() {
         var dialog: Dialog? = dialog
         if (dialog == null) {
             dialog = null
@@ -90,7 +100,7 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
         Toast.makeText(this, "The password is invalid or empty", Toast.LENGTH_SHORT).show()
     }
 
-     override fun notifySignInFail() {
+    override fun notifySignInFail() {
         var dialog: Dialog? = dialog
         if (dialog == null) {
             dialog = null
@@ -99,7 +109,7 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
         Toast.makeText(this, "Email or Password is wrong!", Toast.LENGTH_SHORT).show()
     }
 
-     override fun changeHomeActivity() {
+    override fun changeHomeActivity() {
         var dialog: Dialog? = dialog
         if (dialog == null) {
             dialog = null
@@ -108,7 +118,7 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
         startActivity(Intent(this, HomeActivity::class.java))
     }
 
-     override fun changeVerifiActivity() {
+    override fun changeVerifiActivity() {
         var dialog: Dialog? = dialog
         if (dialog == null) {
             dialog = null
@@ -118,7 +128,7 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
     }
 
 
-     override fun changeUpdateProfile() {
+    override fun changeUpdateProfile() {
         var dialog: Dialog? = dialog
         if (dialog == null) {
             dialog = null

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -204,6 +203,7 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy: ")
+
     }
 
     private fun hideNavBar() {
@@ -275,7 +275,6 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
     }
 
     override fun onBackPressed() {
-
         showDialogLogout()
     }
 
