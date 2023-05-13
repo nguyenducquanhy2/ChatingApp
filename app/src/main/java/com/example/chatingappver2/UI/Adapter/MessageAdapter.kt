@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chatapplication.Ui.InterfaceAdapter.MessageOnClick
@@ -15,10 +14,16 @@ import com.example.chatingappver2.R
 import com.example.chatingappver2.UI.Activity.ShowFullScreenImg.ShowImgFullScreenActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.receive_mesg.view.*
-import kotlinx.android.synthetic.main.send_mesg.view.*
+import kotlinx.android.synthetic.main.receive_mesg.view.imgReceive
+import kotlinx.android.synthetic.main.receive_mesg.view.layoutReceiveMsg
+import kotlinx.android.synthetic.main.receive_mesg.view.tvReceive
+import kotlinx.android.synthetic.main.receive_mesg.view.tvTimeReceive
+import kotlinx.android.synthetic.main.send_mesg.view.imgSend
+import kotlinx.android.synthetic.main.send_mesg.view.layoutMsg
+import kotlinx.android.synthetic.main.send_mesg.view.tvMsgSend
+import kotlinx.android.synthetic.main.send_mesg.view.tvTimeSend
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
 
 class MessageAdapter(
     private var messages: MutableList<Message>,
@@ -80,7 +85,7 @@ class MessageAdapter(
 
             viewHolderReceive.itemView.imgReceive.setOnLongClickListener {
                 val imageViewReceive = viewHolderReceive.itemView.imgReceive
-                MessageOnClick.msgOnLongClickListener(imageViewReceive,message.msgTxt,message.urlImg,message.keyMsg!!)
+                MessageOnClick.msgOnLongClickListener(imageViewReceive,message.msgTxt,message.urlImg,message.keyMsg!!,false)
                 return@setOnLongClickListener true
             }
 
@@ -93,7 +98,7 @@ class MessageAdapter(
             val textViewReceive = viewHolderReceive.itemView.tvReceive
 
 
-            MessageOnClick.msgOnLongClickListener(textViewReceive,message.msgTxt,"",message.keyMsg!!)
+            MessageOnClick.msgOnLongClickListener(textViewReceive,message.msgTxt,"",message.keyMsg!!,false)
             return@setOnLongClickListener true
         }
     }
@@ -112,7 +117,7 @@ class MessageAdapter(
 
             viewHolderSend.itemView.imgSend.setOnLongClickListener {
                 val imageViewSend = viewHolderSend.itemView.imgSend
-                MessageOnClick.msgOnLongClickListener(imageViewSend,message.msgTxt,message.urlImg,message.keyMsg!!)
+                MessageOnClick.msgOnLongClickListener(imageViewSend,message.msgTxt,message.urlImg,message.keyMsg!!,true)
 
                 return@setOnLongClickListener true
             }
@@ -121,7 +126,7 @@ class MessageAdapter(
         viewHolderSend.itemView.tvMsgSend.text = message.msgTxt
         viewHolderSend.itemView.setOnLongClickListener {
             val textViewSend = viewHolderSend.itemView.tvMsgSend
-            MessageOnClick.msgOnLongClickListener(textViewSend,message.msgTxt,"",message.keyMsg!!)
+            MessageOnClick.msgOnLongClickListener(textViewSend,message.msgTxt,"",message.keyMsg!!,true)
             return@setOnLongClickListener true
         }
 

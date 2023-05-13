@@ -12,13 +12,18 @@ import com.example.chatingappver2.Model.UserProfile
 import com.example.chatingappver2.Model.currentContacts
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 class ChatActivityPresenter(
     private val view: ChatActivityContract.view,
@@ -125,7 +130,7 @@ class ChatActivityPresenter(
                         view.messageValueChange(messageChange,messages.lastIndex)
                         val msgSenderRemove="You unsent a message"
                         val msgReceiverRemove="${receiverProfile?.fullname} unsent a message"
-                        for (item in (messages.size-1) downTo 1){
+                        for (item in (messages.lastIndex-1) downTo 1){
                             if (messages[item].msgTxt!=msgSenderRemove && messages[item].msgTxt!=msgReceiverRemove){
                                 sendNotifycationForThem(messages[item])
                                 break
@@ -153,7 +158,15 @@ class ChatActivityPresenter(
 
                     if (messages[messages.lastIndex].keyMsg==messageRemove.keyMsg){
                         view.removeMsgForMe(messages.lastIndex)
-                        sendNotifycationForThem(messages[messages.lastIndex-1])
+                        val msgSenderRemove="You unsent a message"
+                        val msgReceiverRemove="${receiverProfile?.fullname} unsent a message"
+                        for (item in (messages.lastIndex-1) downTo 1){
+                            if (messages[item].msgTxt!=msgSenderRemove && messages[item].msgTxt!=msgReceiverRemove){
+                                sendNotifycationForThem(messages[item])
+                                break
+                            }
+
+                        }
                         return
                     }
 

@@ -73,7 +73,9 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
         setContentView(R.layout.activity_home)
 
         dialog = progressDialog.progressDialog(this)
+
         presenter.loadHeaderProfile()
+        presenter.setNotifityOnline()
         setDefaulFragment()
         setToggleToActionBar()
         registerItemClickNavView()
@@ -217,6 +219,7 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
         val FragmentHome = FragmentHome()
         replateFragment(FragmentHome)
     }
+
 
     private fun registerItemClickNavView() {
         nav_view.getHeaderView(0).imageViewHeader.setOnClickListener {
