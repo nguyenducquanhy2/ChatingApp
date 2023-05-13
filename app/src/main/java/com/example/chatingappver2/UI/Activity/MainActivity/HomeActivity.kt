@@ -62,7 +62,7 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
     }
     private fun CallSerVice() {
         intentCallService=Intent(this, CallService::class.java)
-        startService(intent)
+        startService(intentCallService)
     }
 
     override fun onStop() {
@@ -95,7 +95,6 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
     }
 
     private fun setDefaulFragment() {
-        supportActionBar
         val FragmentHome = FragmentHome()
         replateFragment(FragmentHome)
     }

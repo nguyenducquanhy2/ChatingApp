@@ -161,7 +161,7 @@ class CallService :Service() {
 
     }
 
-    fun genAccessToken(keySid: String, keySecret: String, expireInSecond: Int,userId:String): String? {
+    private fun genAccessToken(keySid: String, keySecret: String, expireInSecond: Int, userId:String): String? {
         try {
             val algorithmHS: Algorithm =
                 Algorithm.HMAC256(keySecret)
