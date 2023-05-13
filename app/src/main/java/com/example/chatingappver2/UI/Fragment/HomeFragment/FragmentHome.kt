@@ -55,7 +55,7 @@ class FragmentHome : Fragment() {
         hideNavBar()
         registerEvent()
         addAdapterToRecycle()
-        notifyOnline()
+
         initRecycler()
         return viewFragment
     }
@@ -66,47 +66,7 @@ class FragmentHome : Fragment() {
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
     }
 
-    private fun notifyOnline() {
-        notifyOnlineOnProfile()
-        notifyOnlineForEveryone()
-    }
 
-    private fun notifyOnlineOnProfile() {
-        database.reference.child("profile").child(currentUser.uid)
-            .child("theyIsActive").setValue(true)
-            .addOnCompleteListener { setOnlineOnProfile ->
-                if (setOnlineOnProfile.isSuccessful) {
-                    Log.d(TAG, "notifyOnlineOnProfile: Success")
-                } else {
-                    Log.e(TAG, "notifyOnlineOnProfile: Fail")
-                }
-            }
-    }
-
-    private fun notifyOnlineForEveryone() {
-        database.reference.child("currentContacts").get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    for (dataSnapshot in task.result.children) {
-                        if (dataSnapshot.key != currentUser.uid) {
-                            database.reference.child("currentContacts")
-                                .child(dataSnapshot.key.toString())
-                                .child(currentUser.uid).child("theyIsActive")
-                                .setValue(true)
-                                .addOnCompleteListener { setOnlineForEveryone ->
-                                    if (setOnlineForEveryone.isSuccessful) {
-                                        Log.d(TAG, "notifyOnlineForEveryone: Success")
-                                    } else {
-                                        Log.e(TAG, "notifyOnlineForEveryone: fail")
-                                    }
-                                }
-                        }
-
-
-                    }
-                }
-            }
-    }
 
     private fun initRecycler() {
         database.reference.child("currentContacts").child(currentUser.uid)

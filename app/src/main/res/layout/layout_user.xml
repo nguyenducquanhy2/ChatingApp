@@ -17,9 +17,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginStart="10dp"
             android:id="@+id/imgProfileUserNewContacts"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="45dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
             android:src="@drawable/img_default" />
 
@@ -59,7 +61,7 @@
             android:fontFamily="@font/roboto_regular"
             android:text="full name"
             android:textColor="@color/black"
-            android:textSize="23sp"
+            android:textSize="18sp"
             android:textStyle="normal" />
 
         <TextView
@@ -71,7 +73,7 @@
             android:maxWidth="250dp"
             android:maxHeight="24dp"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textStyle="normal" />
     </LinearLayout>
 
@@ -87,8 +89,8 @@
 
         <ImageView
             android:id="@+id/iconSeen"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/double_check" />
 
         <TextView
@@ -98,6 +100,6 @@
             android:fontFamily="@font/roboto_regular"
             android:text="last send"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

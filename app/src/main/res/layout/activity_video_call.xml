@@ -6,9 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UI.Activity.VideoCallActivity">
-
-
+    tools:context=".UI.Activity.VideoCallActivity.VideoCallActivity">
 
     <FrameLayout
         android:id="@+id/imgRemoveVideoCAll"
@@ -26,6 +24,7 @@
         android:layout_gravity="right"/>
 
     <LinearLayout
+        android:id="@+id/LayoutInforProfileOfThem"
         android:layout_marginTop="-80dp"
         android:layout_width="wrap_content"
         android:layout_gravity="center"

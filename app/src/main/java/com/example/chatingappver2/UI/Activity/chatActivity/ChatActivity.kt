@@ -1,9 +1,12 @@
 package com.example.chatingappver2.UI.Activity.chatActivity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.*
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -17,19 +20,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.chatapplication.Ui.InterfaceAdapter.MessageOnClick
 import com.example.chatingappver2.Model.Message
 import com.example.chatingappver2.Model.UserProfile
 import com.example.chatingappver2.R
-import com.example.chatingappver2.UI.Activity.CallingActivity
-import com.example.chatingappver2.UI.Activity.MainActivity.HomeActivity
+import com.example.chatingappver2.UI.Activity.InforActivity.viewInforActivity
 import com.example.chatingappver2.UI.Activity.ShowFullScreenImg.ShowImgFullScreenActivity
-import com.example.chatingappver2.UI.Activity.VideoCallActivity
-import com.example.chatingappver2.UI.Activity.viewInforActivity
+import com.example.chatingappver2.UI.Activity.VideoCallActivity.VideoCallActivity
+import com.example.chatingappver2.UI.Activity.VoiceCallActivity.VoiceCallActivity
 import com.example.chatingappver2.UI.Adapter.MessageAdapter
 import com.example.chatingappver2.UI.Dialog.moreDialogMessage
+import com.example.chatingappver2.UI.Service.CallService
 import com.example.finalprojectchatapplycation.Dialog.progressDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_chat.*
@@ -105,13 +110,14 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
     }
 
     private fun getBundleFromIntent() {
+        if (intent==null)return
         val idUserReceive = intent.getStringExtra("idUserReceive")
         presenter.setAcountForcus(idUserReceive!!)
 
     }
 
     private fun registerClickListenerToolBar() {
-        toolBar.imgInfor.setOnClickListener(this)
+        toolBar.ViewLayoutInfor.setOnClickListener(this)
         toolBar.btnBackActivity.setOnClickListener(this)
         toolBar.btnVoiceCall.setOnClickListener (this)
         toolBar.btnVideoCall.setOnClickListener (this)
@@ -125,13 +131,6 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         val ret = super.dispatchTouchEvent(ev)
@@ -172,36 +171,108 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
             R.id.btnOpenAttachment -> {
                 openGallery()
             }
-            R.id.imgInfor -> {
+            R.id.ViewLayoutInfor -> {
                 val intent = Intent(this, viewInforActivity::class.java)
                 val bundle = Bundle()
                 bundle.putSerializable("accountForcus", accountFocus)
                 intent.putExtra("dataFromChatActivity", bundle)
                 startActivity(intent)
             }
+
             R.id.btnVoiceCall -> {
-                if (HomeActivity.client!!.isConnected==false)return
+                if (CallService.client!!.isConnected==false)return
                 val idUser= accountFocus?.idUser
-                val intent=Intent(this, CallingActivity::class.java)
+                val intent=Intent(this, VoiceCallActivity::class.java)
                 intent.putExtra("isComingCall",false)
                 intent.putExtra("to",idUser)
                 startActivity(intent)
             }
 
             R.id.btnVideoCall -> {
-                if (HomeActivity.client!!.isConnected==false)return
+                if (CallService.client!!.isConnected==false)return
                 val idUser=accountFocus?.idUser
                 val intent=Intent(this, VideoCallActivity::class.java)
                 intent.putExtra("isComingCall",false)
                 intent.putExtra("to",idUser)
                 startActivity(intent)
             }
-
         }
     }
 
-    private fun takePhoto() {
 
+    private fun checkPermissionRequest() {
+        val Listpermissions:MutableList<String> = mutableListOf()
+
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.BLUETOOTH_CONNECT
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                Listpermissions.add(Manifest.permission.BLUETOOTH_CONNECT)
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Listpermissions.add(Manifest.permission.CAMERA)
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Listpermissions.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Listpermissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+
+        if (Listpermissions.size>0){
+            ActivityCompat.requestPermissions(this, Listpermissions.toTypedArray(),0)
+
+        }else{
+            OpenCamera()
+        }
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        var isGranted = false
+        if (grantResults.isNotEmpty()) {
+            for (item in grantResults) {
+                if (item != PackageManager.PERMISSION_GRANTED) {
+                    isGranted = false
+                    break
+                } else {
+                    isGranted = true
+                }
+
+            }
+        }
+
+        if (requestCode == 0) {
+            if (!isGranted) {
+                finish()
+            } else {
+                OpenCamera()
+            }
+        }
+    }
+
+    private fun OpenCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "New Picture" + Date().time.toString())
@@ -210,6 +281,11 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uriImg)
         startActivityForResult(intent, REQUEST_CODE_OPEN_CAMERA)
     }
+
+    private fun takePhoto() {
+        checkPermissionRequest()
+    }
+
 
     private fun openGallery() {
         val intent = Intent()
@@ -317,7 +393,8 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
         view: View,
         message: String,
         urlImage: String,
-        keyMsg: String
+        keyMsg: String,
+        isMyMessage: Boolean
     ) {
         val msgSenderRemove="You unsent a message"
         val msgReceiverRemove="${accountFocus?.fullname} unsent a message"
@@ -325,7 +402,7 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
         if (message==msgSenderRemove||message==msgReceiverRemove){
             openDialogRemovedMesage(keyMsg)
         }else{
-            openDialogForMesageText(view,urlImage,keyMsg)
+            openDialogForMesageText(view,urlImage,keyMsg,isMyMessage)
         }
     }
 
@@ -353,7 +430,7 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
         startActivity(intent)
     }
 
-    private fun openDialogForMesageText(viewLongfocus: View, urlImage: String,keyMsg:String) {
+    private fun openDialogForMesageText(viewLongfocus: View, urlImage: String,keyMsg:String,isMyMessage: Boolean) {
 
         val view = LayoutInflater.from(this).inflate(R.layout.bottom_shet_dialog, null)
         val dialog = BottomSheetDialog(this)
@@ -393,35 +470,46 @@ class ChatActivity : AppCompatActivity(), OnClickListener, ChatActivityContract.
         }
 
         dialog.btnMore.setOnClickListener {
-            showMoreLayout(keyMsg)
+            showMoreLayout(keyMsg,isMyMessage)
             dialog.dismiss()
         }
 
         dialog.show()
     }
 
-    private fun showMoreLayout(keyMsg:String) {
+    private fun showMoreLayout(keyMsg:String,isMyMessage: Boolean) {
         val dialogMoreMsg=moreDialogMessage.moreDialogMessage(this)
         val btnForward=dialogMoreMsg.forwardMessage
         val btnRemove=dialogMoreMsg.removeMessage
+
+
+
         btnForward.setOnClickListener {
             Toast.makeText(this, "Forward", Toast.LENGTH_SHORT).show()
             dialogMoreMsg.dismiss()
         }
 
         btnRemove.setOnClickListener {
-            showDialogRemoveMsg(keyMsg)
+            showDialogRemoveMsg(keyMsg,isMyMessage)
             dialogMoreMsg.dismiss()
         }
 
         dialogMoreMsg.show()
     }
 
-    private fun showDialogRemoveMsg(keyMsg:String) {
+    private fun showDialogRemoveMsg(keyMsg:String,isMyMessage: Boolean) {
+
         val view = LayoutInflater.from(this).inflate(R.layout.layout_delete_message, null)
         val dialog = BottomSheetDialog(this)
         dialog.setCancelable(true)
         dialog.setContentView(view)
+
+        if(isMyMessage){
+            dialog.unsendEveryOne.visibility=View.VISIBLE
+        }
+        else{
+            dialog.unsendEveryOne.visibility=View.GONE
+        }
 
         dialog.unsendEveryOne.setOnClickListener {
             Toast.makeText(this, "unsend", Toast.LENGTH_SHORT).show()

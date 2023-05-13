@@ -13,5 +13,7 @@ interface MainActivityContract {
     interface presenter{
         fun logout()
         fun loadHeaderProfile()
+
+        fun setNotifityOnline()
     }
 }

@@ -36,6 +36,9 @@ open class UserProfile : Serializable {
         this.urlImgProfile = urlImgProfile
     }
 
+    override fun toString(): String {
+        return "UserProfile(dateOfBirth='$dateOfBirth', email='$email', fullname='$fullname', idUser='$idUser', theyIsActive=$theyIsActive, urlImgProfile='$urlImgProfile')"
+    }
 
 
 }

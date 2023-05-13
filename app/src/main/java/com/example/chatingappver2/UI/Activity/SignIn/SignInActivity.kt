@@ -3,6 +3,7 @@ package com.example.chatingappver2.UI.Activity.SignIn
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -82,6 +83,60 @@ class SignInActivity() : AppCompatActivity(), View.OnClickListener,
         presenter.Login(valueOf, valueOf2)
     }
 
+    override fun onStop() {
+        //notifyOffline()
+        Log.e(TAG, "onStop: " )
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        //onStop()
+        Log.e(TAG, "onDestroy: " )
+        super.onDestroy()
+    }
+
+    private fun notifyOfflineForEveryone() {
+
+        database.reference.child("currentContacts").get().addOnCompleteListener { task->
+            if (task.isSuccessful){
+                for (itemCurrentContacts in task.result.children){
+                    if (itemCurrentContacts.key!= currentUser!!.uid){
+                        database.reference.child( "currentContacts").child(itemCurrentContacts.key.toString())
+                            .child(currentUser.uid).child("theyIsActive")
+                            .setValue(false).addOnCompleteListener { UpdateProfile->
+                                if (UpdateProfile.isSuccessful){
+
+                                    Log.d(TAG, "notifyOnlineForEveryone: Success")
+                                }else{
+
+                                    Log.e(TAG, "notifyOnlineForEveryone: fail")
+                                }
+                            }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    private fun notifyOffline() {
+        notifyOfflineOnProfile()
+        notifyOfflineForEveryone()
+    }
+
+    private fun notifyOfflineOnProfile() {
+        database.reference.child("profile").child(currentUser!!.uid).child("theyIsActive")
+            .setValue(false).addOnCompleteListener { setOnlineOnProfile->
+                if (setOnlineOnProfile.isSuccessful){
+                    Log.d(TAG, "notifyOfflineOnProfile: Success")
+                }
+                else{
+                    Log.e(TAG, "notifyOfflineOnProfile: Fail")
+                }
+
+            }
+    }
     private fun createUserProfile(snapshot: DataSnapshot): UserProfile {
         val resultMap = snapshot.value as Map<String, Any>
 

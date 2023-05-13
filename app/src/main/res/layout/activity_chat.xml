@@ -13,43 +13,54 @@
         android:background="#04a5a3">
 
         <ImageView
+            android:padding="10dp"
             android:id="@+id/btnBackActivity"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/ic_btn_back_24" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgInfor"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="25dp"
-            android:src="@drawable/img_default" />
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:orientation="vertical">
+            android:src="@drawable/ic_btn_back_24" />
 
-            <TextView
-                android:id="@+id/tvFullNameChatActivity"
+        <LinearLayout
+            android:id="@+id/ViewLayoutInfor"
+            android:layout_marginStart="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:id="@+id/imgInfor"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:src="@drawable/img_default" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:text="Profile Namme"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:layout_marginStart="15dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvActiveChatActivity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="Profile Namme"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                <TextView
+                    android:id="@+id/tvFullNameChatActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Profile Namme"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvActiveChatActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Profile Namme"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -161,8 +172,8 @@
 
                 <ImageButton
                     android:id="@+id/btnSenMessage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/send1" />
             </androidx.cardview.widget.CardView>

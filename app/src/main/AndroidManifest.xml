@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -31,10 +31,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UI.Activity.VideoCallActivity"
+            android:name=".UI.Activity.VideoCallActivity.VideoCallActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.Activity.CallingActivity"
+            android:name=".UI.Activity.VoiceCallActivity.VoiceCallActivity"
             android:exported="false"
             android:theme="@style/NoActionBar" />
         <activity
@@ -70,8 +70,16 @@
             android:name=".UI.Activity.SignUp.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.Activity.viewInforActivity"
+            android:theme="@style/NoActionBar"
+            android:name=".UI.Activity.InforActivity.viewInforActivity"
             android:exported="false" />
+
+        <service
+            android:enabled="true"
+            android:name=".UI.Service.CallService" />
+        <service
+            android:name=".UI.Service.testService"
+            android:exported="true" />
     </application>
 
 </manifest>
