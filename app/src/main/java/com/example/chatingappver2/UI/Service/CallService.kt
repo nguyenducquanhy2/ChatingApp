@@ -52,7 +52,6 @@ class CallService :Service() {
             Log.d(TAG, "onStartCommand: ")
             connectStringee()
         }
-
         return START_REDELIVER_INTENT
     }
 
@@ -72,7 +71,6 @@ class CallService :Service() {
         client!!.registerPushToken(TOKEN,object : StatusListener(){
             override fun onSuccess() {}
         })
-
         client?.connect(TOKEN)
     }
 
@@ -88,17 +86,14 @@ class CallService :Service() {
                         Log.d(TAG, "connected : ${p0.userId}" )
                     }
                 }
-
             }
 
             override fun onConnectionDisconnected(p0: StringeeClient?, p1: Boolean) {
                 CoroutineScope(Dispatchers.Main).launch {
                     if (p0 != null) {
                         Log.d(TAG, "disconnection: ${p0.userId}" )
-
                     }
                 }
-
             }
 
             override fun onIncomingCall(p0: StringeeCall?) {
@@ -114,12 +109,29 @@ class CallService :Service() {
                         }
                     }
                 }
-
             }
 
             override fun onIncomingCall2(p0: StringeeCall2?) {
                 CoroutineScope(Dispatchers.Main).launch {
                     if (p0 != null) {
+
+//                        val intent = Intent(mContext, DialogActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//                        startActivity(intent)
+
+
+//                        val dialogIncomingCall= NotifyInComingCallDialog.logoutDialog(mContext)
+//
+//                        dialogIncomingCall.btnReplyIncomingCall.setOnClickListener {
+//                            dialogIncomingCall.dismiss()
+//                            Toast.makeText(mContext, "dialogIncomingCall", Toast.LENGTH_SHORT).show()
+//                        }
+//                        dialogIncomingCall.btnCancelIncomingCall.setOnClickListener {
+//                            dialogIncomingCall.dismiss()
+//                            Toast.makeText(mContext, "dialogIncomingCall", Toast.LENGTH_SHORT).show()
+//                        }
+//                        dialogIncomingCall.show()
+
                         videoCallMap[p0.callId] = p0
                         if (client!!.isConnected){
                             withContext(coroutineContext){
@@ -129,7 +141,6 @@ class CallService :Service() {
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK;
                                 startActivity(intent)
                             }
-
                         }
                     }
                 }
@@ -138,24 +149,24 @@ class CallService :Service() {
             override fun onConnectionError(p0: StringeeClient?, p1: StringeeError?) {
                 CoroutineScope(Dispatchers.Main).launch {
                     if (p0 != null) {
-                        Log.e(TAG, "connect error: ${p1}" )
+                        connectStringee()
                     }
                 }
-
             }
 
             override fun onRequestNewToken(p0: StringeeClient?) {
                 if (p0 != null) {
-                    Log.d(TAG, "onRequestNewToken: ${p0.userId}")
+                    Log.e(TAG, "onRequestNewToken")
+                    connectStringee()
                 }
             }
 
             override fun onCustomMessage(p0: String?, p1: JSONObject?) {
-
+                Log.e(TAG, "onCustomMessage :")
             }
 
             override fun onTopicMessage(p0: String?, p1: JSONObject?) {
-
+                Log.e(TAG, "onTopicMessage :")
             }
         })
 

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chatingappver2.R
 import com.example.finalprojectchatapplycation.Dialog.progressDialog
-import kotlinx.android.synthetic.main.activity_verification.*
+import kotlinx.android.synthetic.main.activity_verification.btnSendEmailAgain
 
 class VerificationActivity : AppCompatActivity(), VerificationContract.view {
     private lateinit var dialog: Dialog
@@ -28,13 +28,13 @@ class VerificationActivity : AppCompatActivity(), VerificationContract.view {
     }
 
     override fun exceptionSendVerifiEmail() {
-        dialog!!.dismiss()
+        dialog.dismiss()
         Toast.makeText(this, "send email address is fail", Toast.LENGTH_SHORT).show()
     }
 
     override fun sentEmail(email: String) {
-        dialog!!.dismiss()
-        Toast.makeText(this, "Email sent...", Toast.LENGTH_SHORT).show()
+        dialog.dismiss()
+        Toast.makeText(this, "$email sent.", Toast.LENGTH_SHORT).show()
     }
 
 }

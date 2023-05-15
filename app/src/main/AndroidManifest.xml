@@ -6,6 +6,9 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW"
+        tools:ignore="ProtectedPermissions" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -30,6 +33,12 @@
         android:theme="@style/Theme.ChatingAppVer2"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".UI.Activity.DialogActivity"
+            android:theme="@style/Theme.AppCompat.Translucent"
+            android:exported="false" />
+
         <activity
             android:name=".UI.Activity.VideoCallActivity.VideoCallActivity"
             android:exported="false" />
@@ -70,16 +79,18 @@
             android:name=".UI.Activity.SignUp.SignUpActivity"
             android:exported="false" />
         <activity
-            android:theme="@style/NoActionBar"
             android:name=".UI.Activity.InforActivity.viewInforActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
 
         <service
-            android:enabled="true"
-            android:name=".UI.Service.CallService" />
+            android:name=".UI.Service.CallService"
+            android:enabled="true" />
+
         <service
             android:name=".UI.Service.testService"
-            android:exported="true" />
+            android:exported="false"
+            android:permission="TODO" />
     </application>
 
 </manifest>

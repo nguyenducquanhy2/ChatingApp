@@ -12,20 +12,22 @@ class VerificationPresenter(private val view: VerificationContract.view) :
 
     override fun EmailsendAgain() {
 
-        currentUser?.sendEmailVerification()?.addOnCompleteListener{ task->
+        currentUser?.sendEmailVerification()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-
                 val email = currentUser?.email
                 view.sentEmail(email!!)
+            } else {
+                try {
+                    throw (task.exception!!)
+                } catch (e: Exception) {
+                    view.exceptionSendVerifiEmail()
+                    Log.e(TAG, "EmailsendAgain: $e")
+                }
             }
-            try {
-                view.exceptionSendVerifiEmail()
-            } catch (e: Exception) {
-                Log.e(TAG, "EmailsendAgain: $e")
-            }
-
         }
+
+
     }
-
-
 }
+
+

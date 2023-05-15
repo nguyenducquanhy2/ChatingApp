@@ -5,7 +5,11 @@ import com.example.chatingappver2.Model.FriendRequest
 import com.example.chatingappver2.Model.UserProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,6 +35,11 @@ class fragmentNewContactsPresenter(private val view: NewContactsContract.view) :
         val listSenderRequest = database.reference.child("SenderRequest").child(currentUser.uid)
             .get()
 
+        val listFriendRequest = database.reference.child("FriendRequest").child(currentUser.uid)
+            .get()
+
+
+
         for (itemCurrentUser in listCurrentUser.await().children) {
             mapListUserContainsContacts[itemCurrentUser.key!!] = 1
         }
@@ -39,13 +48,14 @@ class fragmentNewContactsPresenter(private val view: NewContactsContract.view) :
             mapListUserContainsContacts[itemSenderRequest.key!!] = 1
         }
 
+        for (itemFriendRequest in listFriendRequest.await().children) {
+            mapListUserContainsContacts[itemFriendRequest.key!!] = 1
+        }
+
         return mapListUserContainsContacts
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:150:0x0024  */ /* JADX WARN: Removed duplicated region for block: B:154:0x0036  */ /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
+
     private suspend fun getUserNotContact() {
         val job1=  getListUserNeedHide()
 

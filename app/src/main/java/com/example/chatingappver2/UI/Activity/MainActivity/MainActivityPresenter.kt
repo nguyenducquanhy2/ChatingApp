@@ -35,12 +35,17 @@ class MainActivityPresenter(
                                 refCurrentUser.get().addOnCompleteListener { contains ->
                                     if (contains.result.value != null && contains.isSuccessful) {
                                         refCurrentUser.child("theyIsActive")
-                                            .setValue(isOnline)
+                                            .setValue(isOnline).addOnCompleteListener { updateTheyActiveForCurrentUser->
+                                                if(updateTheyActiveForCurrentUser.isSuccessful&&isOnline==false){
+                                                    auth.signOut()
+                                                }
+                                            }
                                     }
 
                                 }
                             }
                         }
+
                     }
                 }
         }

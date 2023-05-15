@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.example.chatingappver2.Model.UserProfile
 import com.example.chatingappver2.R
 import com.example.chatingappver2.UI.Service.CallService
 import com.stringee.call.StringeeCall2
@@ -12,6 +14,7 @@ import com.stringee.common.StringeeAudioManager
 import com.stringee.listener.StatusListener
 import com.stringee.video.StringeeVideoTrack
 import kotlinx.android.synthetic.main.activity_calling.tvStatusCall
+import kotlinx.android.synthetic.main.activity_video_call.LayoutInforProfileOfThem
 import kotlinx.android.synthetic.main.activity_video_call.btnAllowVideoCAllActivity
 import kotlinx.android.synthetic.main.activity_video_call.btnAudioVideoCAllActivity
 import kotlinx.android.synthetic.main.activity_video_call.btnCammeraVideoCAllActivity
@@ -19,10 +22,12 @@ import kotlinx.android.synthetic.main.activity_video_call.btnCancelVideoCAllActi
 import kotlinx.android.synthetic.main.activity_video_call.btnDeclineVideoCAllActivity
 import kotlinx.android.synthetic.main.activity_video_call.btnMicVideoCAllActivity
 import kotlinx.android.synthetic.main.activity_video_call.btnSwapCamera
+import kotlinx.android.synthetic.main.activity_video_call.imgAvataVideoCAllActivity
 import kotlinx.android.synthetic.main.activity_video_call.imgLocalVideoCAll
 import kotlinx.android.synthetic.main.activity_video_call.imgRemoveVideoCAll
 import kotlinx.android.synthetic.main.activity_video_call.layoutHandleInCallingVideoCAllActivity
 import kotlinx.android.synthetic.main.activity_video_call.layoutVideoCAllActivityMain
+import kotlinx.android.synthetic.main.activity_video_call.tvFullnameVideoCAllActivity
 import kotlinx.android.synthetic.main.activity_video_call.tvStatusCallVideoCAllActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -131,6 +136,8 @@ class VideoCallActivity : AppCompatActivity(), VideoCallContract.view {
                         override fun onSuccess() {}
                     })
                 }
+
+                imgLocalVideoCAll.visibility=View.VISIBLE
                 layoutHandleInCallingVideoCAllActivity.visibility = View.GONE
                 layoutVideoCAllActivityMain.visibility = View.VISIBLE
             }
@@ -200,15 +207,18 @@ class VideoCallActivity : AppCompatActivity(), VideoCallContract.view {
                 finish()
                 return
             }
-
+            imgLocalVideoCAll.visibility=View.GONE
             layoutHandleInCallingVideoCAllActivity.visibility = View.VISIBLE
             layoutVideoCAllActivityMain.visibility = View.GONE
+            presenter.loadInformationOfThem(call!!.from)
 
         } else {
             call = StringeeCall2(CallService.client,
                 CallService.client?.userId, to)
             layoutHandleInCallingVideoCAllActivity.visibility = View.GONE
             layoutVideoCAllActivityMain.visibility = View.VISIBLE
+            presenter.loadInformationOfThem(call!!.to)
+            imgLocalVideoCAll.visibility=View.VISIBLE
         }
 
         audioManager = StringeeAudioManager(this)
@@ -235,6 +245,7 @@ class VideoCallActivity : AppCompatActivity(), VideoCallContract.view {
                         }
 
                         StringeeCall2.SignalingState.ANSWERED -> {
+                            LayoutInforProfileOfThem.visibility=View.GONE
                             tvStatusCallVideoCAllActivity.text = "Starting"
                         }
 
@@ -279,6 +290,7 @@ class VideoCallActivity : AppCompatActivity(), VideoCallContract.view {
 
                 if (mMediaConnected == StringeeCall2.MediaState.CONNECTED) {
                     if (mSignalLingState == StringeeCall2.SignalingState.ANSWERED) {
+
                         tvStatusCall.text = "Started"
                     }
                 } else {
@@ -345,4 +357,11 @@ class VideoCallActivity : AppCompatActivity(), VideoCallContract.view {
 
         }
     }
+
+    override fun setInformationOfThem(themProfile: UserProfile) {
+        Glide.with(this).asBitmap().load(themProfile.urlImgProfile)
+            .into(imgAvataVideoCAllActivity)
+        tvFullnameVideoCAllActivity.text=themProfile.fullname
+    }
+
 }

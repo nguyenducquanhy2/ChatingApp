@@ -6,10 +6,22 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.chatingappver2.Model.UserProfile
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.FirebaseDatabase
 
 class VideoCallPresenter(private val view: VideoCallContract.view, private val context: Context) :
     VideoCallContract.presenter {
-
+    override fun loadInformationOfThem(idProfile: String) {
+        val database= FirebaseDatabase.getInstance()
+        database.reference.child("profile").child(idProfile)
+            .get().addOnCompleteListener{task->
+                if (task.isSuccessful){
+                    val themProfile=createUserProfile(task.result)
+                    view.setInformationOfThem(themProfile)
+                }
+            }
+    }
 
     override fun checkPermissionRequest() {
         val Listpermissions: MutableList<String> = mutableListOf()
@@ -43,5 +55,18 @@ class VideoCallPresenter(private val view: VideoCallContract.view, private val c
         } else {
             view.executeInitCall()
         }
+    }
+
+    private fun createUserProfile(snapshot: DataSnapshot): UserProfile {
+        val resultMap = snapshot.value as Map<String, Any>
+
+        val theyIsActive: Boolean = resultMap["theyIsActive"].toString().toBoolean()
+        val fullname: String = resultMap["fullname"].toString()
+        val urlImgProfile: String = resultMap["urlImgProfile"].toString()
+        val dateOfBirth: String = resultMap["dateOfBirth"].toString()
+        val email: String = resultMap["email"].toString()
+        val idUser: String = resultMap["idUser"].toString()
+
+        return UserProfile(dateOfBirth, email, fullname, idUser, theyIsActive, urlImgProfile)
     }
 }

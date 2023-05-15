@@ -64,13 +64,11 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
         intentCallService=Intent(this, CallService::class.java)
         startService(intentCallService)
     }
-
     override fun onStop() {
         Log.e(TAG, "onStop: ", )
 
         super.onStop()
     }
-
     override fun onRestart() {
         Log.e(TAG, "onRestart: " )
         if (CallService.client?.isConnected==false){
@@ -80,28 +78,25 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
         }
         super.onRestart()
     }
-
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy: ")
 
     }
-
     private fun hideNavBar() {
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
     }
-
     private fun setDefaulFragment() {
+        supportActionBar?.title ="Messages"
         val FragmentHome = FragmentHome()
         replateFragment(FragmentHome)
     }
-
-
     private fun registerItemClickNavView() {
         nav_view.getHeaderView(0).imageViewHeader.setOnClickListener {
+            supportActionBar?.title ="My Profile"
             countUserBackPress=0
             val fragmentViewProfile = FragmentViewProfile()
             replateFragment(fragmentViewProfile)
@@ -115,6 +110,7 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
                 }
 
                 R.id.nav_UpdateProfile -> {
+                    supportActionBar?.title ="Update Profile"
                     countUserBackPress=0
                     val FragmentUpdateProfile = FragmentUpdateProfile()
                     replateFragment(FragmentUpdateProfile)
@@ -123,12 +119,12 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
 
                 R.id.nav_view_Home -> {
                     countUserBackPress=1
-                    val FragmentHome = FragmentHome()
-                    replateFragment(FragmentHome)
+                    setDefaulFragment()
                     drawer_layout.close()
                 }
 
                 R.id.nav_change_password -> {
+                    supportActionBar?.title ="Change Password"
                     countUserBackPress=0
                     val FragmentChangePassword = FragmentChangePassword()
                     replateFragment(FragmentChangePassword)
@@ -136,6 +132,7 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
                 }
 
                 R.id.nav_newContact -> {
+                    supportActionBar?.title ="Add Friend"
                     countUserBackPress=0
                     val FragmentNewContact = FragmentNewContacts()
                     replateFragment(FragmentNewContact)
@@ -143,6 +140,7 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
                 }
 
                 R.id.nav_Friend_Request -> {
+                    supportActionBar?.title ="Friend Request"
                     countUserBackPress=0
                     val FriendRequestFragment = FriendRequestFragment()
                     replateFragment(FriendRequestFragment)
@@ -150,19 +148,18 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
                 }
 
                 R.id.nav_Friend_Request_Sent -> {
+                    supportActionBar?.title ="Friend Request Sent"
                     countUserBackPress=0
                     val FragmentFriendRequestSent = FragmentFriendRequestSent()
                     replateFragment(FragmentFriendRequestSent)
                     drawer_layout.close()
                 }
             }
-
             return@setNavigationItemSelectedListener true
         }
 
 
     }
-
     override fun onBackPressed() {
         countUserBackPress++
         if (countUserBackPress==1){
@@ -172,7 +169,6 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
         countUserBackPress=1
         showDialogLogout()
     }
-
     private fun showDialogLogout() {
         val dialogLogout = LogoutDialog.logoutDialog(this)
 
@@ -185,39 +181,34 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
 
         btnLogout.setOnClickListener {
             presenter.logout()
+            dialogLogout.dismiss()
         }
         dialogLogout.show()
     }
-
     private fun replateFragment(fragment: Fragment) {
         val fragmentTransition = supportFragmentManager.beginTransaction()
         fragmentTransition.replace(R.id.content_frame, fragment)
         fragmentTransition.commit()
     }
-
     private fun setToggleToActionBar() {
         toggle = ActionBarDrawerToggle(this, drawer_layout, R.string.open, R.string.close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)
     }
-
     override fun SignOutSuccess() {
-        dialog.dismiss()
+//        dialog.dismiss()
         finish()
     }
-
     override fun SignOutFail() {
         dialog.dismiss()
     }
-
     override fun setHeaderProfile(value: UserProfile, currentUser: FirebaseUser) {
         val viewHeader = nav_view.getHeaderView(0)
         Glide.with(this@HomeActivity).asBitmap().load(value.urlImgProfile)
