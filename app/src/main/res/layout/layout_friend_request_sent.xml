@@ -8,6 +8,7 @@
     android:layout_marginBottom="5dp">
 
     <LinearLayout
+        android:layout_marginStart="5dp"
         android:id="@+id/AvataLayoutFriendRequestSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,39 +62,41 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="normal" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btnCancelFriendRequestSent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity=""
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/back_btn_accept_friend_request"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="10dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="5dp"
-        android:tag="SendAddFriendRequest"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/sent_add_friend_request"
-            android:visibility="visible" />
-
-        <TextView
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/btnCancelFriendRequestSent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Cancel Request"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:layout_gravity=""
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/back_btn_accept_friend_request"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp"
+            android:tag="SendAddFriendRequest"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/sent_add_friend_request"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Cancel Request"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,47 +64,43 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="normal" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/btnRequestAddFriend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity=""
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/back_btn_accept_friend_request"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="10dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="5dp"
-        android:tag="SendAddFriendRequest"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imgNotifySendRequestAddFriend"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/ic_new_contact"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/imgNotifySentFriendRequest"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/ic_new_contact"
-            android:visibility="gone" />
-
-        <TextView
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/btnRequestAddFriend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Add Friend"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:layout_gravity=""
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/back_btn_accept_friend_request"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp"
+            android:tag="SendAddFriendRequest"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_new_contact"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Add Friend"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
