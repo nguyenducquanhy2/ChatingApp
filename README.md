@@ -1,8 +1,13 @@
-# Chating App Version2
-### kotlin
-### android studio
+# Chating App
 
-# Demo of App
+### kotlin & android studio
+
+
+
+## [Download Demo App](https://github.com/nguyenducquanhy2/ChatingApp/blob/master/demoApp/release/app-release.apk) 
+
+
+# Image of App
 
 > Login and SignUp
 
