@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.chatingappver2.R
 import com.example.chatingappver2.UI.Activity.Verification.VerificationActivity
 import com.example.finalprojectchatapplycation.Dialog.progressDialog
-import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.btnSignUp
+import kotlinx.android.synthetic.main.activity_sign_up.edtConfirmPassword
+import kotlinx.android.synthetic.main.activity_sign_up.edtEmailSignUp
+import kotlinx.android.synthetic.main.activity_sign_up.edtxtPassword
 
 class SignUpActivity : AppCompatActivity(), SignUpContract.view {
 
@@ -19,6 +22,7 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.view {
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
         setContentView(R.layout.activity_sign_up)
+        supportActionBar?.title ="SignUp"
         progessDialog = progressDialog.progressDialog(this)
         registerClickListener()
     }
