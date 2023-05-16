@@ -176,6 +176,7 @@ class VideoCallActivity : AppCompatActivity(), VideoCallContract.view {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         var isGranted = false
         if (grantResults.isNotEmpty()) {
             for (item in grantResults) {
