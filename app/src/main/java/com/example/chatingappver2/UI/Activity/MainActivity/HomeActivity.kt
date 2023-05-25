@@ -1,14 +1,21 @@
 package com.example.chatingappver2.UI.Activity.MainActivity
 
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.chatingappver2.Model.UserProfile
@@ -32,6 +39,9 @@ import kotlinx.android.synthetic.main.layout_logout.btnCancelLogout
 import kotlinx.android.synthetic.main.nav_header_home.view.BirthDayHeader
 import kotlinx.android.synthetic.main.nav_header_home.view.fullnameHeader
 import kotlinx.android.synthetic.main.nav_header_home.view.imageViewHeader
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class HomeActivity : AppCompatActivity(), MainActivityContract.view {
@@ -43,6 +53,8 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var dialog: Dialog
     private lateinit var intentCallService:Intent
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -55,20 +67,24 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
         setToggleToActionBar()
         registerItemClickNavView()
         hideNavBar()
+
         //connectStringee()
 
         CallSerVice()
 
     }
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun CallSerVice() {
+        checkRequestPermission()
         intentCallService=Intent(this, CallService::class.java)
+
         startService(intentCallService)
     }
     override fun onStop() {
-        Log.e(TAG, "onStop: ", )
-
+        Log.e(TAG, "onStop: " )
         super.onStop()
     }
+
     override fun onRestart() {
         Log.e(TAG, "onRestart: " )
         if (CallService.client?.isConnected==false){
@@ -83,6 +99,58 @@ class HomeActivity : AppCompatActivity(), MainActivityContract.view {
         Log.d(TAG, "onDestroy: ")
 
     }
+
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun checkRequestPermission() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val Listpermissions: MutableList<String> = mutableListOf()
+            if (ContextCompat.checkSelfPermission(
+                    this@HomeActivity,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                Listpermissions.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+
+            if (Listpermissions.size > 0) {
+                ActivityCompat.requestPermissions(
+                    this@HomeActivity,
+                    Listpermissions.toTypedArray(),
+                    0
+                )
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+
+        var isGranted = false
+        if (grantResults.isNotEmpty()) {
+            for (item in grantResults) {
+                if (item != PackageManager.PERMISSION_GRANTED) {
+                    isGranted = false
+                    break
+                } else {
+                    isGranted = true
+                }
+
+            }
+        }
+
+        if (requestCode == 0) {
+            if (!isGranted) {
+                Toast.makeText(this, "You need allow permission.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun hideNavBar() {
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

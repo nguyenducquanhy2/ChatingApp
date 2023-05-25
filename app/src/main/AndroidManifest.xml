@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW"
         tools:ignore="ProtectedPermissions" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -23,6 +24,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".UI.Notification.Channel.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -40,9 +42,12 @@
             android:exported="false" />
 
         <activity
+            android:theme="@style/NoActionBar"
+            android:parentActivityName=".UI.Activity.MainActivity.HomeActivity"
             android:name=".UI.Activity.VideoCallActivity.VideoCallActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".UI.Activity.MainActivity.HomeActivity"
             android:name=".UI.Activity.VoiceCallActivity.VoiceCallActivity"
             android:exported="false"
             android:theme="@style/NoActionBar" />
@@ -91,6 +96,8 @@
             android:name=".UI.Service.testService"
             android:exported="false"
             android:permission="TODO" />
+
+        <receiver android:name=".UI.BroadcastReceiver.myBroadCast"/>
     </application>
 
 </manifest>

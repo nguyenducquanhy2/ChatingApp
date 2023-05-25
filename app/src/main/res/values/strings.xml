@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChatingAppVer2</string>
+    <string name="app_name">Chating</string>
     <string name="close">close navigation drawer</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="email">Email</string>
@@ -21,4 +21,6 @@
     <string name="menu_newContact">New contacts</string>
     <string name="menu_updateProfile">Update Profile</string>
     <string name="menu_viewProfile">View Profile</string>
+    <string name="channel_name">Incoming Calls\n</string>
+    <string name="channel_description">This is incomming calls channel</string>
 </resources>

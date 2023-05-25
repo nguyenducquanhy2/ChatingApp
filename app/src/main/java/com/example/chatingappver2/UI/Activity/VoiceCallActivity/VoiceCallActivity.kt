@@ -14,7 +14,7 @@ import com.example.chatingappver2.R
 import com.example.chatingappver2.UI.Service.CallService
 import com.stringee.call.StringeeCall
 import com.stringee.common.StringeeAudioManager
-import kotlinx.android.synthetic.main.activity_calling.btnAllow
+import kotlinx.android.synthetic.main.activity_calling.btnAnswer
 import kotlinx.android.synthetic.main.activity_calling.btnAudio
 import kotlinx.android.synthetic.main.activity_calling.btnCancel
 import kotlinx.android.synthetic.main.activity_calling.btnDecline
@@ -69,6 +69,7 @@ class VoiceCallActivity : AppCompatActivity(),VoiceCallContract.view {
                 }
             }
         }
+
         btnMic.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 isMicOn=!isMicOn
@@ -91,6 +92,7 @@ class VoiceCallActivity : AppCompatActivity(),VoiceCallContract.view {
                 finish()
             }
         }
+
         btnDecline.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 if (call != null) {
@@ -105,7 +107,8 @@ class VoiceCallActivity : AppCompatActivity(),VoiceCallContract.view {
                 }
             }
         }
-        btnAllow.setOnClickListener {
+
+        btnAnswer.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 if (call != null) {
                     call!!.answer(object : com.stringee.listener.StatusListener(){

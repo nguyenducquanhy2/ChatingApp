@@ -328,8 +328,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_mail" />
-                            <entry key="sourceFile" value="C:\Users\DELL\Documents\iconCalling\swapcam.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_chat" />
+                            <entry key="sourceFile" value="D:\backUpHDD\backUpHDD\Learning Android\chatApp\chat-bubble\ic_chat.svg" />
                           </map>
                         </option>
                       </PersistentState>

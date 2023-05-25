@@ -135,7 +135,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/btnAllow"
+                android:id="@+id/btnAnswer"
                 android:layout_marginLeft="-5dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
