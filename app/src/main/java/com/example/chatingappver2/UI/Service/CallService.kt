@@ -48,8 +48,8 @@ class CallService :Service() {
 
     private val currentUser = FirebaseAuth.getInstance().currentUser!!
     private val TAG: String="VideoCallService"
-    private val KEY_SID:String="SK.0.y6Tonp4PIM2kpxgeWtaq2osSexgmaPBN"
-    private val KEY_SECRET:String="VmVKSGx0N1pwSHBoaHFneW9UaXZES00yRTNaWE1xcw=="
+    private val KEY_SID:String="SK.0.YwEQNrk4129OAHMV7YN9ONssDjLVuiB"
+    private val KEY_SECRET:String="MndLMVRlTUVuN1dFcTJrTk8yalIzNlo1UHRlRWZrb2U="
     private var TOKEN:String? = null
     private val DECLINE=-1
     private val ANSWER=1

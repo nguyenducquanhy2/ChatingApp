@@ -28,12 +28,13 @@ class adapterFriendRequestSent(
 
     override fun onBindViewHolder(holder: FriendRequestSentViewHolder, i: Int) {
 
-        val CurrentFriendRequestSent = listFriendRequestSent.get(i)
-        Glide.with(context).asBitmap().load(CurrentFriendRequestSent.urlImgProfile)
+        val mCurrentFriendRequestSent = listFriendRequestSent[i]
+        holder.itemView.tvFullnameUserAccountFriendRequestSent.text=mCurrentFriendRequestSent.fullname
+        Glide.with(context).asBitmap().load(mCurrentFriendRequestSent.urlImgProfile)
             .into(holder.itemView.imgProfileUserFriendRequestSent)
 
         holder.itemView.btnCancelFriendRequestSent.setOnClickListener {
-            frienRequestSentOnClick.cancelFriendRequestOnClickListener(CurrentFriendRequestSent.idUser)
+            frienRequestSentOnClick.cancelFriendRequestOnClickListener(mCurrentFriendRequestSent.idUser)
         }
     }
 
