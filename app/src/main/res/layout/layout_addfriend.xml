@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutParent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:id="@+id/AvataLayoutAddFriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgProfileUserAddFriend"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_default" />
+
+        <FrameLayout
+            android:id="@+id/imgIconOnlineAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="-22dp"
+            android:layout_marginBottom="3dp"
+            android:visibility="invisible">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/icon_online" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutNameAndMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="7dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/AvataLayoutAddFriend"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvFullnameUserAccountAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="full name"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/btnRequestAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/back_btn_accept_friend_request"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp"
+            android:tag="SendAddFriendRequest"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_new_contact"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Add Friend"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

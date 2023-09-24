@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="100dp"
+        android:id="@+id/imtAvataProfile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/img_default" />
+
+    <LinearLayout
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_mail"/>
+
+        <TextView
+            android:id="@+id/InforEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:paddingEnd="20dp"
+            android:text="Email: "
+            android:textColor="#303030"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line_width"/>
+
+    <LinearLayout
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_human"/>
+
+        <TextView
+            android:id="@+id/InforFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:paddingEnd="20dp"
+            android:text="Full name: "
+            android:textColor="#303030"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line_width"/>
+    <LinearLayout
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_infor"/>
+
+        <TextView
+            android:id="@+id/InforBirthDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:paddingEnd="20dp"
+            android:text="Birth Day: "
+            android:textColor="#303030"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutParent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:id="@+id/AvataLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginStart="10dp"
+            android:id="@+id/imgProfileUserNewContacts"
+            android:layout_width="45dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_default" />
+
+        <FrameLayout
+            android:id="@+id/imgIconOnline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="-22dp"
+            android:layout_marginBottom="3dp"
+            android:visibility="invisible">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/icon_online" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutNameAndMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="7dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/AvataLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvFullnameUserAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="full name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tvLastMesage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="lasMsg"
+            android:maxWidth="250dp"
+            android:maxHeight="24dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        android:layout_marginEnd="10dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/iconSeen"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/double_check" />
+
+        <TextView
+            android:id="@+id/tvLastDateSent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="last send"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

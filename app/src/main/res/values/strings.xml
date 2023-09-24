@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Chating</string>
+    <string name="close">close navigation drawer</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="email">Email</string>
+    <string name="forgotPassword">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="open">open navigation drawer</string>
+    <string name="password">Password</string>
+    <string name="questionSignUp">Already have an account?</string>
+    <string name="sendNewPass">Request reset password</string>
+    <string name="signUp">SignUp</string>
+    <string name="menu_Profile">Profile</string>
+    <string name="menu_Download_image">Save</string>
+    <string name="menu_changePassword">Change Password</string>
+    <string name="menu_current_user">Message</string>
+    <string name="menu_forward">Forward</string>
+    <string name="menu_frienRequest">Friend Request</string>
+    <string name="menu_frienRequestSent">Friend Request Sent</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_newContact">New contacts</string>
+    <string name="menu_updateProfile">Update Profile</string>
+    <string name="menu_viewProfile">View Profile</string>
+    <string name="channel_name">Incoming Calls\n</string>
+    <string name="channel_description">This is incomming calls channel</string>
+</resources>

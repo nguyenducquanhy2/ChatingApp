@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.VideoCallActivity">
+
+    <FrameLayout
+        android:id="@+id/imgRemoveVideoCAll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#A8A8A8"/>
+
+    <FrameLayout
+        android:id="@+id/imgLocalVideoCAll"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:background="@color/black"
+        android:layout_gravity="right"/>
+
+    <LinearLayout
+        android:id="@+id/LayoutInforProfileOfThem"
+        android:layout_marginTop="-80dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgAvataVideoCAllActivity"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/img_default"/>
+        <TextView
+            android:id="@+id/tvFullnameVideoCAllActivity"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="32sp"
+            android:text="fullname"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tvStatusCallVideoCAllActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Status"
+            android:textColor="@color/white"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutVideoCAllActivityMain"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+
+        android:visibility="visible"
+        android:paddingTop="0dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="0dp"
+        android:background="@drawable/back_ground_funcion_calling_activity"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/btnCammeraVideoCAllActivity"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_showcam" />
+
+        <ImageView
+            android:id="@+id/btnMicVideoCAllActivity"
+            android:layout_width="35dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/turnonmic" />
+        <ImageView
+            android:id="@+id/btnAudioVideoCAllActivity"
+            android:layout_width="45dp"
+            android:layout_marginEnd="0dp"
+            android:layout_height="60dp"
+            android:src="@drawable/outspeaker" />
+        <ImageView
+            android:id="@+id/btnSwapCamera"
+            android:layout_marginEnd="00dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/swichswapcam"/>
+
+        <ImageView
+            android:id="@+id/btnCancelVideoCAllActivity"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/cancel" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/layoutHandleInCallingVideoCAllActivity"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="60dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnDeclineVideoCAllActivity"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/decline" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Decline"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+                android:layout_marginTop="-10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="60dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnAllowVideoCAllActivity"
+                android:layout_marginLeft="-5dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/callingl" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="answer"
+                android:fontFamily="@font/roboto_medium"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="-10dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

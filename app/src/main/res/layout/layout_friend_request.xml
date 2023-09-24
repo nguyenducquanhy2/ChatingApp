@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutParent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:id="@+id/AvataLayoutAddFriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgProfileUserFriendRequest"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_default" />
+
+        <FrameLayout
+            android:id="@+id/imgIconOnlineFriendRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="-22dp"
+            android:layout_marginBottom="3dp"
+            android:visibility="invisible">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/icon_online" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutNameAndMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="7dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/AvataLayoutAddFriend"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvFullnameUserAccountFriendRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="full name"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnACceptFriendRequest"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/back_btn_accept_friend_request"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Accept"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDeleteFriendRequest"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/back_btn_delete_friend_request"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Delete" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

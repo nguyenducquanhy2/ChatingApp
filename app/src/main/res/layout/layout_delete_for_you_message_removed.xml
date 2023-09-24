@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="This message will be removed for you."/>
+
+
+        <FrameLayout
+            android:id="@+id/removeForYouDialogMsgRemoved"
+            android:layout_width="match_parent"
+            android:layout_marginStart="-10dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="left|center"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Remove for you"/>
+            <ImageView
+                android:layout_gravity="right|center"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_delete"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

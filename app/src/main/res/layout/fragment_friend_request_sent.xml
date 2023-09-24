@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/layout_search_view"
+                android:elevation="7dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="3dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_search" />
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="Type..."
+                    android:paddingStart="5dp" />
+
+                <ImageView
+                    android:id="@+id/btnHideKeyBoard"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_exit"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rclvContact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/btnReply"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_reply" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Reply"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layOutContainCopy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/btnCopy"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_copy" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Copy"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layOutContainDownloadImg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/btnFullViewImage"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_view_img" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Full image"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnPin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_pin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Pin"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_more" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="More"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

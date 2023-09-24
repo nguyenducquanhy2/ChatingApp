@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".myapplication.MyApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/icon_chat"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon_chat"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ChatingAppVer2"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".ui.activity.DialogActivity"
+            android:theme="@style/Theme.AppCompat.Translucent"
+            android:exported="false" />
+
+        <activity
+            android:theme="@style/NoActionBar"
+            android:parentActivityName=".ui.activity.HomeActivity"
+            android:name=".ui.activity.VideoCallActivity"
+            android:exported="false" />
+        <activity
+            android:parentActivityName=".ui.activity.HomeActivity"
+            android:name=".ui.activity.VoiceCallActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.activity.SignInActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.ChatActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.activity.ForgotPasswordActivity"
+            android:exported="false" /> <!-- android:theme="@style/MyTheme" -->
+        <activity
+            android:name=".ui.activity.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ProfileCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ShowImgFullScreenActivity"
+            android:exported="false"
+            android:theme="@style/activityFullScreen" />
+        <activity
+            android:name=".ui.activity.VerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ViewInforActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+
+        <service
+            android:name=".service.CallService"
+            android:enabled="true" />
+
+        <service
+            android:name=".service.testService"
+            android:exported="false"
+            android:permission="TODO" />
+
+        <receiver android:name=".BroadcastReceiver.myBroadCast"/>
+    </application>
+
+</manifest>

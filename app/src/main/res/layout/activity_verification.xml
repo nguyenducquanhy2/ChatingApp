@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+        <ImageView
+
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/verification" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Email: "
+            android:textAllCaps="false"
+            android:textColor="#ffba3333"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Is not verification"
+            android:textAllCaps="false"
+            android:textColor="#ba3333"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="323dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="Please check the inbox or spam to confirm and log in again "
+            android:textAllCaps="false"
+            android:textColor="#8A8A8A"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSendEmailAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="Send again"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+</LinearLayout>
